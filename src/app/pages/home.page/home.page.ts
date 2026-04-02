@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class HomePage {
   imgParent = "";
+  showImage = true;
 
   products: Product[] = [
     {
@@ -38,5 +39,9 @@ export class HomePage {
 
   imgLoaded(img: string){
     console.log(img)
+  }
+
+  toggleImage(){
+    this.showImage = !this.showImage;
   }
 }
