@@ -1,3 +1,37 @@
-img {
-    width: 200px;
+.product{
+    border: 1px solid blue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4%;
+    border-radius:  5px;
+    .price{
+        text-align: right;
+        color: green;
+    }
+
+    .name{
+        font-weight: 900;
+    }
+
+    .descripion{
+        font-weight: 300;
+    }
+
+    button {
+        border: none;
+        background-color: blue;
+        color: white;
+        font-weight: 900;
+        padding: 4% 0%;
+        border-radius: 5px;
+
+        &:hover{
+            cursor: pointer;
+            background-color: white;
+            color: blue;
+            border: 1px solid blue;
+        }
+
+    }
 }
