@@ -7,8 +7,10 @@
         <p class="description">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque ut iure vero iusto ullam nihil nemo commodi ad reprehenderit sequi magni non, reiciendis culpa quo recusandae iste illo, modi at.
         </p>
-        <h2 class="price">$ {{product.price}}</h2>
+        <h2 class="price"> {{product.price | currency}}</h2>
     </div>
-    <button>Add to card</button>
+    <button 
+    (click) = "onAddToCart()"
+    >Add to card</button>
 
 </div>
