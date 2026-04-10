@@ -5,11 +5,15 @@
     justify-content: center;
     padding: 4%;
     border-radius:  5px;
+    min-height: 500px;
+    max-height: 500px;
 
     p,h2{
         margin: 10px 0px; 
     }
+
     .price{
+        font-size: 14px;
         text-align: right;
         color: green;
     }
@@ -20,6 +24,10 @@
 
     .descripion{
         font-weight: 300;
+    }
+
+    .information{
+        height: 200px;
     }
 
     button {

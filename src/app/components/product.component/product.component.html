@@ -1,16 +1,15 @@
 <div class="product">
-    <app-img 
-        [img]="product.image"
-    ></app-img>
+    <div class="img">
+        <app-img [img]="product.images[0]"></app-img>
+    </div>
     <div class="information">
-        <p class="name">{{product.name}}</p>
+        <p class="name">{{product.title}}</p>
         <p class="description">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque ut iure vero iusto ullam nihil nemo commodi ad reprehenderit sequi magni non, reiciendis culpa quo recusandae iste illo, modi at.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque ut iure vero iusto ullam nihil nemo commodi
+            ad reprehenderit sequi magni non, reiciendis culpa quo recusandae iste illo, modi at.
         </p>
         <h2 class="price"> {{product.price | currency}}</h2>
     </div>
-    <button 
-    (click) = "onAddToCart()"
-    >Add to card</button>
+    <button (click)="onAddToCart()">Add to card</button>
 
 </div>
