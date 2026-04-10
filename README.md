@@ -1,59 +1,101 @@
-# MyStore
+# 🛒 My Store
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.0.
+## 🇺🇸 English
 
-## Development server
+This repository contains a study project developed as part of the
+[Angular Course: Components and Services by Platzi](https://platzi.com/cursos/angular-componentes).
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+## 🎓 Certificate of Completion
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+👉 [View Certificate](./src/assets/pdf/certificado.pdf)
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 📦 Project Overview
 
-```bash
-ng generate component component-name
-```
+This project is a **mini e-commerce application** that includes:
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+* A navigation menu
+* A product listing
+* Shopping cart logic
 
-```bash
-ng generate --help
-```
+---
 
-## Building
+## 🚀 What I Learned
 
-To build the project run:
+Throughout this project, I gained hands-on experience with:
 
-```bash
-ng build
-```
+* 🧩 Components
+* 🔁 Parent–child communication
+* ⚙️ Angular CLI
+* 🧭 Directives
+* 🔄 Pipes
+* 🛠️ Custom Pipes
+* 🧹 ESLint (ng lint)
+* 🌐 HTTP Client
+* ♻️ Component Lifecycle
+* 🧠 Services
+* 🛒 State management (Store)
+* ⚡ Reactivity
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
 
-## Running unit tests
+## 💡 Purpose
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+This project was built for learning purposes and to strengthen my Angular fundamentals by applying real-world concepts.
 
-```bash
-ng test
-```
+---
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+# 🛒 Mi Tienda
 
-```bash
-ng e2e
-```
+## 🇪🇸 Español
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Este repositorio contiene un proyecto de estudio desarrollado a partir del
+[Curso de Angular: Componentes y Servicios de Platzi](https://platzi.com/cursos/angular-componentes).
 
-## Additional Resources
+---
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 🎓 Certificado de Aprobación
+
+👉 [Ver certificado](./src/assets/pdf/certificado.pdf)
+
+---
+
+## 📦 Descripción del Proyecto
+
+Este proyecto es una **mini tienda online** que incluye:
+
+* Un menú de navegación
+* Un listado de productos
+* Lógica de carrito de compras
+
+---
+
+## 🚀 Lo que Aprendí
+
+Durante este proyecto trabajé con:
+
+* 🧩 Componentes
+* 🔁 Comunicación entre padre e hijo
+* ⚙️ Angular CLI
+* 🧭 Directivas
+* 🔄 Pipes
+* 🛠️ Pipes personalizados
+* 🧹 ESLint (ng lint)
+* 🌐 HTTP Client
+* ♻️ Ciclo de vida de componentes
+* 🧠 Servicios
+* 🛒 Manejo de estado (Store)
+* ⚡ Reactividad
+
+---
+
+## 💡 Objetivo
+
+Este proyecto fue realizado con fines educativos para fortalecer mis conocimientos en Angular aplicando conceptos del mundo real.
+
+---
