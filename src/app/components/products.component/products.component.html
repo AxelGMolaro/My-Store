@@ -1,16 +1,28 @@
 <p appHighlight>
-    Today {{today | date : 'medium'}}
+  Today {{ today | date:'medium' }}
 </p>
+
 <p>
-    From {{ date | date:'medium' }} to today it has been: {{ date | timeAgo }}
+  From {{ date | date:'medium' }} to today it has been:
+  {{ date | timeAgo }}
 </p>
-<p *ngIf="loading">Cargando productos...</p>
 
+<!-- LOADING -->
+<div class="loading" *ngIf="loading">
+  <p>Loading...</p>
+  <div class="loading-bar" [style.width.%]="barPorcent"></div>
+</div>
+
+<!-- EMPTY -->
 <p *ngIf="!loading && products.length === 0">
-    No hay productos
+  Empty products
 </p>
 
+<!-- LIST -->
 <div class="products--grid" *ngIf="!loading && products.length > 0">
-    <app-product *ngFor="let product of products" [product]="product" (addedProduct)="onAddToShoppingCart($event)">
-    </app-product>
+  <app-product
+    *ngFor="let product of products"
+    [product]="product"
+    (addedProduct)="onAddToShoppingCart($event)">
+  </app-product>
 </div>

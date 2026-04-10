@@ -16,3 +16,18 @@
         grid-gap: 15px;
     }
 }
+
+.loading{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+    width: 100vw;
+}
+
+.loading-bar {
+  height: 6px;
+  background: blue;
+  transition: width 0.2s ease;
+}

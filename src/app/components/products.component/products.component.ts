@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Product } from '../../models/product.model';
 import { ProductComponent } from '../product.component/product.component';
 import { StoreService } from '../../services/store.service';
@@ -9,62 +9,115 @@ import { HighlightDirective } from '../../directives/highlight.directive';
 
 @Component({
   selector: 'app-products',
-  imports: [CommonModule, ProductComponent,TimeAgoPipe,HighlightDirective],
+  standalone: true,
+  imports: [CommonModule, ProductComponent, TimeAgoPipe, HighlightDirective],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, OnDestroy {
 
+  myShoppingCart: Product[] = [];
+  total = 0;
+  products: Product[] = [];
 
+  loading = true; // 👈 SIMPLE (sin setter ahora)
 
-  myShoppingCart: Product[] = []
-  total = 0
-  products: Product[] = []
-  loading = true;
-  today = new Date()
-  date = new Date(2026, 1, 1)
+  today = new Date();
+  date = new Date(2026, 1, 1);
 
-  // products: Product[] = [
-  //   { id: "ID_1", name: "Moto 110", image: "https://picsum.photos/id/1011/300/200", price: 1400000 },
-  //   { id: "ID_2", name: "Honda Wave", image: "https://picsum.photos/id/1012/300/200", price: 1600000 },
-  //   { id: "ID_3", name: "Yamaha FZ", image: "https://picsum.photos/id/1015/300/200", price: 2100000 },
-  //   { id: "ID_4", name: "Kawasaki Ninja", image: "https://picsum.photos/id/1016/300/200", price: 7200000 },
-  //   { id: "ID_5", name: "BMW GS", image: "https://picsum.photos/id/1020/300/200", price: 15000000 },
-  //   { id: "ID_6", name: "Suzuki 125", image: "https://picsum.photos/id/1024/300/200", price: 1800000 },
-  //   { id: "ID_7", name: "Motomel Blitz", image: "https://picsum.photos/id/1025/300/200", price: 1200000 },
-  //   { id: "ID_8", name: "Zanella ZB", image: "https://picsum.photos/id/1031/300/200", price: 1300000 },
-  //   { id: "ID_9", name: "Corven Energy", image: "https://picsum.photos/id/1033/300/200", price: 1250000 },
-  //   { id: "ID_10", name: "Gilera Smash", image: "https://picsum.photos/id/1035/300/200", price: 1350000 },
-  //   { id: "ID_11", name: "Honda XR", image: "https://picsum.photos/id/1037/300/200", price: 2600000 },
-  //   { id: "ID_12", name: "Yamaha R3", image: "https://picsum.photos/id/1040/300/200", price: 5000000 },
-  //   { id: "ID_13", name: "KTM Duke", image: "https://picsum.photos/id/1043/300/200", price: 5500000 },
-  //   { id: "ID_14", name: "Benelli TNT", image: "https://picsum.photos/id/1050/300/200", price: 4800000 },
-  //   { id: "ID_15", name: "Harley Davidson", image: "https://picsum.photos/id/1060/300/200", price: 12000000 }
-  // ];
+  barPorcent = 0;
+  barPorcentInterval: any;
+  safetyTimeout: any; // 🔥 fallback
+
+  startTime = 0;
+  MIN_LOADING_TIME = 2000; // 2 segundos
 
   constructor(
     private storeService: StoreService,
-    private productService: ProductsService
+    private productService: ProductsService,
+    private cd: ChangeDetectorRef
   ) {
-    this.myShoppingCart = this.storeService.getMyShoppinCart()
-    this.total = this.storeService.getTotal()
+    this.myShoppingCart = this.storeService.getMyShoppinCart();
+    this.total = this.storeService.getTotal();
   }
 
   ngOnInit(): void {
+    this.startTime = Date.now(); // 🔥 guardamos inicio
+    this.startLoadingBar();
+
+    this.safetyTimeout = setTimeout(() => {
+      this.finishLoading();
+    }, 5000);
+
     this.productService.getAllProducts()
       .subscribe({
         next: (res: any) => {
-          this.products = res.products
-          this.loading = false
+          this.products = res.products;
+          this.finishLoadingWithDelay(); // 👈 usamos este
         },
         error: () => {
-          this.products = []
-          this.loading = false
+          this.products = [];
+          this.finishLoadingWithDelay(); // 👈 también acá
         }
-      })
+      });
   }
+
+  ngOnDestroy(): void {
+    this.clearAllTimers();
+  }
+
   onAddToShoppingCart(product: Product) {
-    this.storeService.addProduct(product)
-    this.total = this.storeService.getTotal()
+    this.storeService.addProduct(product);
+    this.total = this.storeService.getTotal();
+  }
+
+  // 🚀 arranca animación
+  startLoadingBar() {
+    this.barPorcent = 0;
+
+    this.barPorcentInterval = setInterval(() => {
+      if (this.barPorcent < 90) {
+        this.barPorcent += 1;
+      }
+      this.cd.detectChanges();
+    }, 100);
+  }
+
+  // 🧠 termina TODO correctamente
+  finishLoading() {
+    this.loading = false;
+
+    clearTimeout(this.safetyTimeout);
+
+    if (this.barPorcentInterval) {
+      clearInterval(this.barPorcentInterval);
+    }
+
+    this.barPorcent = 100;
+    this.cd.detectChanges();
+  }
+  
+  finishLoadingWithDelay() {
+    const elapsed = Date.now() - this.startTime;
+
+    const remaining = this.MIN_LOADING_TIME - elapsed;
+
+    if (remaining > 0) {
+      setTimeout(() => {
+        this.finishLoading();
+      }, remaining);
+    } else {
+      this.finishLoading();
+    }
+  }
+
+  clearAllTimers() {
+    if (this.barPorcentInterval) {
+      clearInterval(this.barPorcentInterval);
+    }
+
+    if (this.safetyTimeout) {
+      clearTimeout(this.safetyTimeout);
+    }
   }
 }
