@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Renderer2, HostListener} from '@angular/core';
+import { Directive, ElementRef, Renderer2, HostListener, inject} from '@angular/core';
 
 @Directive({
   selector: '[appHighlight]',
@@ -6,9 +6,10 @@ import { Directive, ElementRef, Renderer2, HostListener} from '@angular/core';
 })
 export class HighlightDirective {
 
+  private el = inject(ElementRef);
+  private renderer = inject(Renderer2);
+  
   constructor(
-    private el: ElementRef,
-    private renderer: Renderer2
   ) {
     this.setNeonEffect();
   }

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Product } from '../models/product.model';
 
 @Injectable({
@@ -7,12 +7,10 @@ import { Product } from '../models/product.model';
 })
 export class ProductsService {
 
-  constructor(
-    private http: HttpClient
-  ){
 
-  }
-  getAllProducts(){
+  private http = inject(HttpClient);
+
+  getAllProducts() {
     return this.http.get<Product[]>("https://dummyjson.com/products")
   }
 }

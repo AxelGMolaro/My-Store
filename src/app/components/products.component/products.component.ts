@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, inject } from '@angular/core';
 import { Product } from '../../models/product.model';
 import { ProductComponent } from '../product.component/product.component';
 import { StoreService } from '../../services/store.service';
@@ -26,16 +26,17 @@ export class ProductsComponent implements OnInit, OnDestroy {
   date = new Date(2026, 1, 1);
 
   barPorcent = 0;
-  barPorcentInterval: any;
-  safetyTimeout: any; // 🔥 fallback
+  barPorcentInterval = 0;
+  safetyTimeout = 0; // 🔥 fallback
 
   startTime = 0;
   MIN_LOADING_TIME = 2000; // 2 segundos
 
+  private storeService = inject(StoreService);
+  private productService = inject(ProductsService);
+  private cd = inject(ChangeDetectorRef);
+
   constructor(
-    private storeService: StoreService,
-    private productService: ProductsService,
-    private cd: ChangeDetectorRef
   ) {
     this.myShoppingCart = this.storeService.getMyShoppinCart();
     this.total = this.storeService.getTotal();
@@ -51,6 +52,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
     this.productService.getAllProducts()
       .subscribe({
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         next: (res: any) => {
           this.products = res.products;
           this.finishLoadingWithDelay(); // 👈 usamos este

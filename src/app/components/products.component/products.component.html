@@ -7,22 +7,27 @@
   {{ date | timeAgo }}
 </p>
 
-<!-- LOADING -->
-<div class="loading" *ngIf="loading">
-  <p>Loading...</p>
-  <div class="loading-bar" [style.width.%]="barPorcent"></div>
-</div>
+@if (loading) {
+  <!-- LOADING -->
+  <div class="loading">
+    <p>Loading...</p>
+    <div class="loading-bar" [style.width.%]="barPorcent"></div>
+  </div>
+} @else {
 
-<!-- EMPTY -->
-<p *ngIf="!loading && products.length === 0">
-  Empty products
-</p>
+  @if (products.length === 0) {
+    <!-- EMPTY -->
+    <p>Empty products</p>
+  } @else {
+    <!-- LIST -->
+    <div class="products--grid">
+      @for (product of products; track product.id) {
+        <app-product
+          [product]="product"
+          (addedProduct)="onAddToShoppingCart($event)">
+        </app-product>
+      }
+    </div>
+  }
 
-<!-- LIST -->
-<div class="products--grid" *ngIf="!loading && products.length > 0">
-  <app-product
-    *ngFor="let product of products"
-    [product]="product"
-    (addedProduct)="onAddToShoppingCart($event)">
-  </app-product>
-</div>
+}

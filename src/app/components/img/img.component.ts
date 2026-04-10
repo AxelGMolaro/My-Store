@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, inject, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-img',
@@ -8,8 +8,8 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, In
   styleUrl: './img.component.scss',
 })
 export class ImgComponent implements OnInit , OnDestroy, OnChanges{
-  img: string = ''
-  @Input("img")  
+  img: string | undefined = ''
+  @Input()  
    set changeImage(newImage : string) {
    this.img = newImage
    console.log("Hey cambio la imagen")
@@ -20,9 +20,8 @@ export class ImgComponent implements OnInit , OnDestroy, OnChanges{
   counter = 0;
   counterFn: number | undefined;
 
-  constructor(private cd: ChangeDetectorRef){
+  private cd = inject(ChangeDetectorRef)
 
-  }
   ngOnInit(): void {
     this.counterFn = window.setInterval(() => {
       this.counter = this.counter + 1;
