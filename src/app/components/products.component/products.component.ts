@@ -13,13 +13,16 @@ import { ProductsService } from '../../services/products.service';
 })
 export class ProductsComponent implements OnInit {
 
-   
+
 
   myShoppingCart: Product[] = []
   total = 0
   products: Product[] = []
   loading = true;
- // products: Product[] = [
+  today = new Date()
+  data = new Date(2026, 1, 1)
+
+  // products: Product[] = [
   //   { id: "ID_1", name: "Moto 110", image: "https://picsum.photos/id/1011/300/200", price: 1400000 },
   //   { id: "ID_2", name: "Honda Wave", image: "https://picsum.photos/id/1012/300/200", price: 1600000 },
   //   { id: "ID_3", name: "Yamaha FZ", image: "https://picsum.photos/id/1015/300/200", price: 2100000 },
@@ -40,24 +43,24 @@ export class ProductsComponent implements OnInit {
   constructor(
     private storeService: StoreService,
     private productService: ProductsService
-  ){
+  ) {
     this.myShoppingCart = this.storeService.getMyShoppinCart()
     this.total = this.storeService.getTotal()
   }
 
   ngOnInit(): void {
-  this.productService.getAllProducts()
-    .subscribe({
-      next: (res: any) => {
-        this.products = res.products
-        this.loading = false
-      },
-      error: () => {
-        this.products = []
-        this.loading = false
-      }
-    })
-}
+    this.productService.getAllProducts()
+      .subscribe({
+        next: (res: any) => {
+          this.products = res.products
+          this.loading = false
+        },
+        error: () => {
+          this.products = []
+          this.loading = false
+        }
+      })
+  }
   onAddToShoppingCart(product: Product) {
     this.storeService.addProduct(product)
     this.total = this.storeService.getTotal()
