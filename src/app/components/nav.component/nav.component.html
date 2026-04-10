@@ -3,11 +3,12 @@
 
         <!-- LOGO -->
         <a href="#" class="logo">
-            <img src="https://st4.depositphotos.com/18674256/21427/v/450/depositphotos_214278572-stock-illustration-gps-vector-icon-isolated-on.jpg" alt="logo">
+            <img src="https://st4.depositphotos.com/18674256/21427/v/450/depositphotos_214278572-stock-illustration-gps-vector-icon-isolated-on.jpg"
+                alt="logo">
         </a>
 
         <!-- BOTÓN HAMBURGUESA -->
-        <button class="menu-toggle" id="menuToggle" (click) = "toggleMenu()">
+        <button class="menu-toggle" id="menuToggle" (click)="toggleMenu()">
             ☰
         </button>
 
@@ -17,22 +18,27 @@
                 <li><a href="#">Products</a></li>
                 <li><a href="#">Cart</a></li>
                 <li><a href="#about">About</a></li>
-
             </ul>
+
         </nav>
+
 
         <!-- INFO USUARIO -->
         <div class="info">
+              <div class="cart">
+                    <img src="assets/svg/cart.svg" alt="">
+                    {{counter}}
+                </div>
             <span class="account">axelmolaro@gmail.com</span>
         </div>
 
     </div>
     <div class="side-menu" [class.active]="activeMenu">
-        <button (click) = "toggleMenu()">Close</button>
-         <ul>
-                <li><a href="#">Products</a></li>
-                <li><a href="#">Cart</a></li>
-                <li><a href="#about">About</a></li>
+        <button (click)="toggleMenu()">Close</button>
+        <ul>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Cart</a></li>
+            <li><a href="#about">About</a></li>
         </ul>
     </div>
 </header>

@@ -59,7 +59,7 @@ body {
 .side-menu {
     position: fixed;
     top: 0;
-    left:0;
+    left: 0;
     bottom: 0;
     right: 0;
     background-color: black;
@@ -70,7 +70,7 @@ body {
     transition: all ease-out .5s;
     color: white;
 
-    ul{
+    ul {
         list-style: none;
         width: 100%;
         display: flex;
@@ -78,6 +78,7 @@ body {
         justify-content: center;
         align-items: center;
         padding-top: 35%;
+
         li {
             background-color: white;
             margin: 10px 0px;
@@ -93,7 +94,8 @@ body {
         }
 
     }
-    button{
+
+    button {
         margin: 0px 10px;
         border-radius: 100%;
         width: 60px;
@@ -105,12 +107,23 @@ body {
 
     &.active {
 
-    transform: translateX(0%);
-        
+        transform: translateX(0%);
+
     }
 }
 
 
+.cart {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 4px;
+    img{
+        width: 20px;
+        margin-right: 5px;
+    }
+}
 
 /* 📱 MOBILE */
 @media screen and (max-width: 768px) {
@@ -148,6 +161,7 @@ body {
         .info {
             display: none;
         }
+
+
     }
 }
-
