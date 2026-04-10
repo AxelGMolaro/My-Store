@@ -1,9 +1,8 @@
-
-<p>
+<p appHighlight>
     Today {{today | date : 'medium'}}
 </p>
 <p>
-    Products added : {{myShoppingCart.length}} - {{total | currency}}
+    From {{ date | date:'medium' }} to today it has been: {{ date | timeAgo }}
 </p>
 <p *ngIf="loading">Cargando productos...</p>
 

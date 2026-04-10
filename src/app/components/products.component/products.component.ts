@@ -4,10 +4,12 @@ import { Product } from '../../models/product.model';
 import { ProductComponent } from '../product.component/product.component';
 import { StoreService } from '../../services/store.service';
 import { ProductsService } from '../../services/products.service';
+import { TimeAgoPipe } from '../../pipes/time-ago-pipe';
+import { HighlightDirective } from '../../directives/highlight.directive';
 
 @Component({
   selector: 'app-products',
-  imports: [CommonModule, ProductComponent],
+  imports: [CommonModule, ProductComponent,TimeAgoPipe,HighlightDirective],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
 })
@@ -20,7 +22,7 @@ export class ProductsComponent implements OnInit {
   products: Product[] = []
   loading = true;
   today = new Date()
-  data = new Date(2026, 1, 1)
+  date = new Date(2026, 1, 1)
 
   // products: Product[] = [
   //   { id: "ID_1", name: "Moto 110", image: "https://picsum.photos/id/1011/300/200", price: 1400000 },
